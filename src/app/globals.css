@@ -1,79 +1,33 @@
 @import "tailwindcss";
 
+/* ----------------------------------
+   GLOBAL DESIGN SYSTEM
+---------------------------------- */
 :root {
-  --background: #f8fafc;
-  --section-alt: #f1f5f9;
-  --foreground: #0f172a;
-  --card: #ffffff;
-  --surface: #ffffff;
-  --surface-strong: #f1f5f9;
-  --surface-muted: rgba(15, 23, 42, 0.06);
-  --primary: #4f46e5;
-  --accent: #0ea5e9;
-  --success: #16a34a;
-  --secondary: #475569;
-  --muted: #64748b;
-  --muted-strong: #334155;
-  --border: #e2e8f0;
-  --ring: rgba(79, 70, 229, 0.24);
-  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  /* BRAND COLORS */
+  --primary: #2EC4B6;      /* Turquoise */
+  --secondary: #1A1A2E;    /* Midnight Blue */
+
+  /* BACKGROUND SYSTEM */
+  --background: #0f1220;
+  --surface: #14182b;
+  --surface-muted: rgba(255, 255, 255, 0.05);
+
+  /* TEXT */
+  --foreground: #ffffff;
+  --muted: rgba(255, 255, 255, 0.65);
+
+  /* UI TOKENS */
+  --border: rgba(46, 196, 182, 0.15);
+  --ring: rgba(46, 196, 182, 0.3);
+
+  /* SHADOW */
+  --shadow: 0 24px 80px rgba(0, 0, 0, 0.25);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0b0f19;
-    --foreground: #e5e7eb;
-    --card: #111827;
-    --surface: #111827;
-    --surface-strong: #1f2937;
-    --surface-muted: rgba(255, 255, 255, 0.08);
-    --primary: #4f46e5;
-    --accent: #22c55e;
-    --secondary: #9ca3af;
-    --muted: #9ca3af;
-    --muted-strong: #d1d5db;
-    --border: #1f2937;
-    --ring: rgba(79, 70, 229, 0.24);
-    --shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
-  }
-}
-
-.light {
-  --background: #f8fafc;
-  --section-alt: #f1f5f9;
-  --foreground: #0f172a;
-  --card: #ffffff;
-  --surface: #ffffff;
-  --surface-strong: #f1f5f9;
-  --surface-muted: rgba(15, 23, 42, 0.06);
-  --primary: #4f46e5;
-  --accent: #0ea5e9;
-  --success: #16a34a;
-  --secondary: #475569;
-  --muted: #64748b;
-  --muted-strong: #334155;
-  --border: #e2e8f0;
-  --ring: rgba(79, 70, 229, 0.24);
-  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-}
-
-.dark {
-  --background: #0b0f19;
-  --foreground: #e5e7eb;
-  --card: #111827;
-  --surface: #111827;
-  --surface-strong: #1f2937;
-  --surface-muted: rgba(255, 255, 255, 0.08);
-  --primary: #4f46e5;
-  --accent: #22c55e;
-  --secondary: #9ca3af;
-  --muted: #9ca3af;
-  --muted-strong: #d1d5db;
-  --border: #1f2937;
-  --ring: rgba(79, 70, 229, 0.24);
-  --shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
-}
-
+/* ----------------------------------
+   TAILWIND THEME BRIDGE
+---------------------------------- */
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -81,29 +35,43 @@
   --font-mono: var(--font-geist-mono);
 }
 
+/* ----------------------------------
+   BASE STYLES
+---------------------------------- */
 html {
   background: var(--background);
-  color-scheme: light;
-}
-
-.dark {
   color-scheme: dark;
 }
 
 body {
   min-height: 100%;
-  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  background:
+    radial-gradient(
+      circle at 20% 20%,
+      rgba(46, 196, 182, 0.08),
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at 80% 0%,
+      rgba(46, 196, 182, 0.06),
+      transparent 40%
+    ),
+    #0f1220;
+
   color: var(--foreground);
   font-family: var(--font-geist-sans), ui-sans-serif, system-ui,
-    -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji",
-    "Segoe UI Emoji";
+    -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+
   transition: background 0.3s ease, color 0.3s ease;
 }
 
+/* ----------------------------------
+   GLOBAL BEHAVIOR
+---------------------------------- */
 * {
   scroll-behavior: smooth;
 }
 
 ::selection {
-  background: rgba(14, 165, 233, 0.18);
+  background: rgba(46, 196, 182, 0.25);
 }
