@@ -6,15 +6,26 @@ import { cn } from "@/lib/utils";
 type ButtonVariant = "primary" | "secondary" | "ghost";
 
 const base =
-  "inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-semibold tracking-tight transition focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-0 disabled:opacity-60 disabled:pointer-events-none";
+  "inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-semibold tracking-tight transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] disabled:opacity-60 disabled:pointer-events-none";
 
+/* ----------------------------------
+   VARIANTS (ALIGNED TO DESIGN SYSTEM)
+---------------------------------- */
 const variants: Record<ButtonVariant, string> = {
+  /* PRIMARY — MAIN CTA */
   primary:
-    "bg-[var(--primary)] text-white shadow-[0_18px_50px_rgba(79,70,229,0.16)] hover:brightness-110",
+    "bg-[#2EC4B6] text-[#1A1A2E] shadow-[0_12px_30px_rgba(46,196,182,0.35)] " +
+    "hover:brightness-110 hover:shadow-[0_16px_40px_rgba(46,196,182,0.45)]",
+
+  /* SECONDARY — GLASS BUTTON */
   secondary:
-    "border border-[var(--border)] bg-[var(--surface)] text-[var(--foreground)] hover:bg-[var(--surface-strong)]",
+    "border border-[rgba(46,196,182,0.2)] bg-white/5 text-white backdrop-blur-md " +
+    "hover:bg-[#2EC4B6]/10 hover:border-[#2EC4B6]/40",
+
+  /* GHOST — MINIMAL */
   ghost:
-    "text-[var(--foreground)] hover:bg-[var(--surface)] border border-transparent",
+    "text-white/70 border border-transparent " +
+    "hover:text-white hover:bg-[#2EC4B6]/10",
 };
 
 export function Button({
@@ -40,15 +51,25 @@ export function Button({
 }) {
   const cls = cn(base, variants[variant], className);
 
+  /* ----------------------------------
+     LINK HANDLING
+  ---------------------------------- */
   if (href) {
     const isExternal = href.startsWith("http");
+
     if (isExternal) {
       return (
-        <a className={cls} href={href} target={target} rel={rel}>
+        <a
+          className={cls}
+          href={href}
+          target={target}
+          rel={rel || "noopener noreferrer"}
+        >
           {children}
         </a>
       );
     }
+
     return (
       <Link className={cls} href={href}>
         {children}
@@ -56,10 +77,17 @@ export function Button({
     );
   }
 
+  /* ----------------------------------
+     BUTTON
+  ---------------------------------- */
   return (
-    <button className={cls} onClick={onClick} type={type} disabled={disabled}>
+    <button
+      className={cls}
+      onClick={onClick}
+      type={type}
+      disabled={disabled}
+    >
       {children}
     </button>
   );
 }
-
