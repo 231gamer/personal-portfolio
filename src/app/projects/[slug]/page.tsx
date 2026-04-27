@@ -79,7 +79,7 @@ export default async function ProjectPage({
                 </ul>
               </div>
 
-              <div className="mt-6 rounded-2xl border border-[var(--border)] bg-black/20 p-4">
+              <div className="mt-6 rounded-2xl border border-[var(--border)] bg-[var(--surface-muted)] p-4">
                 <p className="text-xs font-semibold tracking-[0.18em] uppercase text-[var(--muted)]">
                   Results (examples)
                 </p>

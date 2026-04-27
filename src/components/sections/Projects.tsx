@@ -25,7 +25,7 @@ export function Projects() {
                 className="group rounded-3xl border border-[var(--border)] bg-[var(--surface)] p-6 shadow-[var(--shadow)]"
               >
                 <div className="flex items-start justify-between gap-4">
-                  <div className="inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-[var(--border)] bg-black/20">
+                  <div className="inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-[var(--border)] bg-[var(--surface-muted)]">
                     <p.icon size={18} />
                   </div>
                   <div className="text-right">
@@ -43,7 +43,7 @@ export function Projects() {
                   {p.summary}
                 </p>
 
-                <div className="mt-5 rounded-2xl border border-[var(--border)] bg-black/20 p-4">
+                <div className="mt-5 rounded-2xl border border-[var(--border)] bg-[var(--surface-muted)] p-4">
                   <p className="text-xs font-semibold tracking-[0.18em] uppercase text-[var(--muted)]">
                     What I solved
                   </p>
@@ -56,7 +56,7 @@ export function Projects() {
                   {p.features.slice(0, 3).map((f) => (
                     <span
                       key={f}
-                      className="rounded-full border border-[var(--border)] bg-black/15 px-3 py-1 text-xs text-[var(--muted)]"
+                      className="rounded-full border border-[var(--border)] bg-[var(--surface-muted)] px-3 py-1 text-xs text-[var(--muted)]"
                     >
                       {f}
                     </span>

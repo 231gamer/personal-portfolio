@@ -51,7 +51,7 @@ export function Contact() {
   }
 
   return (
-    <section id="contact" className="border-y border-[var(--border)]">
+    <section id="contact" className="border-y border-[var(--border)] bg-[var(--section-alt)]">
       <Container className="py-16 sm:py-20">
         <div className="grid gap-10 lg:grid-cols-2 lg:gap-14">
           <FadeIn>
@@ -90,7 +90,7 @@ export function Contact() {
           </FadeIn>
 
           <FadeIn delay={0.06}>
-            <div className="rounded-3xl border border-[var(--border)] bg-[var(--surface)] p-6 shadow-[var(--shadow)]">
+            <div className="rounded-3xl border border-[var(--border)] bg-[var(--surface)] p-6 shadow-sm hover:shadow-md transition-shadow duration-300">
               <p className="text-sm font-semibold tracking-tight">Project details</p>
               <p className="mt-1 text-sm text-[var(--muted)]">
                 The more context you share, the faster I can recommend the right path.
@@ -244,7 +244,7 @@ function Field({
         type={type}
         placeholder={placeholder}
         required={required}
-        className="h-11 rounded-2xl border border-[var(--border)] bg-black/20 px-4 text-sm text-[var(--foreground)] placeholder:text-[rgba(234,240,255,0.45)] focus:outline-none focus:ring-2 focus:ring-[var(--ring)]"
+        className="h-11 rounded-2xl border border-[var(--border)] bg-[var(--surface)] px-4 text-sm text-[var(--foreground)] placeholder:text-[var(--muted)] focus:outline-none focus:ring-2 focus:ring-[var(--ring)]"
       />
     </label>
   );
@@ -270,13 +270,13 @@ function Select({
         name={name}
         required={required}
         defaultValue=""
-        className="h-11 rounded-2xl border border-[var(--border)] bg-black/20 px-4 text-sm text-[var(--foreground)] focus:outline-none focus:ring-2 focus:ring-[var(--ring)]"
+        className="h-11 rounded-2xl border border-[var(--border)] bg-[var(--surface)] px-4 text-sm text-[var(--foreground)] focus:outline-none focus:ring-2 focus:ring-[var(--ring)]"
       >
         <option value="" disabled>
           Select…
         </option>
         {options.map((o) => (
-          <option key={o} value={o} className="bg-[#0b1220]">
+          <option key={o} value={o} className="bg-[var(--surface)] text-[var(--foreground)]">
             {o}
           </option>
         ))}
@@ -306,7 +306,7 @@ function Textarea({
         placeholder={placeholder}
         required={required}
         rows={5}
-        className="rounded-2xl border border-[var(--border)] bg-black/20 px-4 py-3 text-sm text-[var(--foreground)] placeholder:text-[rgba(234,240,255,0.45)] focus:outline-none focus:ring-2 focus:ring-[var(--ring)]"
+        className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] px-4 py-3 text-sm text-[var(--foreground)] placeholder:text-[var(--muted)] focus:outline-none focus:ring-2 focus:ring-[var(--ring)]"
       />
     </label>
   );

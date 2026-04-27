@@ -28,7 +28,7 @@ const steps = [
 
 export function About() {
   return (
-    <section id="about" className="border-y border-[var(--border)]">
+    <section id="about" className="border-y border-[var(--border)] bg-[var(--section-alt)]">
       <Container className="py-16 sm:py-20">
         <div className="grid gap-10 lg:grid-cols-2 lg:gap-14">
           <FadeIn>
@@ -63,10 +63,10 @@ export function About() {
             {steps.map((s) => (
               <StaggerItem
                 key={s.title}
-                className="rounded-3xl border border-[var(--border)] bg-[var(--surface)] p-6 shadow-[var(--shadow)]"
+                className="rounded-3xl border border-[var(--border)] bg-[var(--surface)] p-6 shadow-sm hover:shadow-md transition-shadow duration-300"
               >
                 <div className="flex items-start gap-4">
-                  <div className="inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-[var(--border)] bg-black/20">
+                  <div className="inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-[var(--border)] bg-[var(--surface-muted)]">
                     <s.icon size={18} />
                   </div>
                   <div>

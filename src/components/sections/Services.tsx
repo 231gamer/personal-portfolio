@@ -54,7 +54,7 @@ const services = [
 
 export function Services() {
   return (
-    <section id="services" className="border-y border-[var(--border)]">
+    <section id="services" className="border-y border-[var(--border)] bg-[var(--section-alt)]">
       <Container className="py-16 sm:py-20">
         <div className="flex flex-col gap-10">
           <FadeIn>
@@ -69,10 +69,10 @@ export function Services() {
             {services.map((s) => (
               <StaggerItem
                 key={s.title}
-                className="rounded-3xl border border-[var(--border)] bg-[var(--surface)] p-6 shadow-[var(--shadow)]"
+                className="rounded-3xl border border-[var(--border)] bg-[var(--surface)] p-6 shadow-sm hover:shadow-md transition-shadow duration-300"
               >
                 <div className="flex items-start justify-between gap-3">
-                  <div className="inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-[var(--border)] bg-black/20">
+                  <div className="inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-[var(--border)] bg-[var(--surface-muted)]">
                     <s.icon size={18} />
                   </div>
                 </div>
@@ -101,7 +101,7 @@ export function Services() {
                   </ul>
                 </div>
 
-                <div className="mt-5 rounded-2xl border border-[var(--border)] bg-black/20 p-4">
+                <div className="mt-5 rounded-2xl border border-[var(--border)] bg-[var(--surface-muted)] p-4">
                   <p className="text-xs font-semibold tracking-[0.18em] uppercase text-[var(--muted)]">
                     Includes
                   </p>

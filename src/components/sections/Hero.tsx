@@ -71,7 +71,7 @@ export function Hero() {
 
           <div className="lg:pt-6">
             <FadeIn>
-              <div className="relative rounded-3xl border border-[var(--border)] bg-[var(--surface)] p-6 shadow-[var(--shadow)]">
+              <div className="relative rounded-3xl border border-[var(--border)] bg-[var(--surface)] p-6 shadow-sm hover:shadow-md transition-shadow duration-300">
                 <div className="flex items-center justify-between">
                   <p className="text-sm font-semibold tracking-tight">
                     Recent results (examples)
@@ -80,7 +80,7 @@ export function Hero() {
                 </div>
 
                 <Stagger className="mt-6 grid gap-3">
-                  <StaggerItem className="rounded-2xl border border-[var(--border)] bg-black/20 p-4">
+                  <StaggerItem className="rounded-2xl border border-[var(--border)] bg-[var(--surface-muted)] p-4">
                     <div className="flex items-start gap-3">
                       <div className="mt-0.5 inline-flex h-9 w-9 items-center justify-center rounded-xl bg-[rgba(79,124,255,0.18)] text-[var(--foreground)]">
                         <Zap size={18} />
@@ -96,7 +96,7 @@ export function Hero() {
                     </div>
                   </StaggerItem>
 
-                  <StaggerItem className="rounded-2xl border border-[var(--border)] bg-black/20 p-4">
+                  <StaggerItem className="rounded-2xl border border-[var(--border)] bg-[var(--surface-muted)] p-4">
                     <div className="flex items-start gap-3">
                       <div className="mt-0.5 inline-flex h-9 w-9 items-center justify-center rounded-xl bg-[rgba(30,227,207,0.16)] text-[var(--foreground)]">
                         <ShieldCheck size={18} />
@@ -112,7 +112,7 @@ export function Hero() {
                     </div>
                   </StaggerItem>
 
-                  <StaggerItem className="rounded-2xl border border-[var(--border)] bg-black/20 p-4">
+                  <StaggerItem className="rounded-2xl border border-[var(--border)] bg-[var(--surface-muted)] p-4">
                     <div className="flex items-start gap-3">
                       <div className="mt-0.5 inline-flex h-9 w-9 items-center justify-center rounded-xl bg-[rgba(255,255,255,0.08)] text-[var(--foreground)]">
                         <Sparkles size={18} />
@@ -145,7 +145,7 @@ export function Hero() {
                   ].map((item) => (
                     <div
                       key={item}
-                      className="rounded-2xl border border-[var(--border)] bg-black/20 px-3 py-3 text-xs font-semibold text-[var(--muted-strong)]"
+                      className="rounded-2xl border border-[var(--border)] bg-[var(--surface-muted)] px-3 py-3 text-xs font-semibold text-[var(--muted-strong)]"
                     >
                       {item}
                     </div>

@@ -3,6 +3,7 @@
 import { navItems } from "@/lib/site";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
+import { ThemeToggle } from "@/components/theme-toggle";
 import { cn } from "@/lib/utils";
 import { Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -30,8 +31,10 @@ export function Header() {
   return (
     <header
       className={cn(
-        "sticky top-0 z-50 border-b transition backdrop-blur",
-        scrolled ? "border-[var(--border)] bg-black/30" : "border-transparent",
+        "sticky top-0 z-50 border-b transition backdrop-blur backdrop-saturate-150",
+        scrolled
+          ? "border-[var(--border)] bg-[var(--background)]/80 shadow-sm"
+          : "border-transparent bg-transparent",
       )}
     >
       <Container className="py-4">
@@ -59,7 +62,8 @@ export function Header() {
             ))}
           </nav>
 
-          <div className="hidden md:block">
+          <div className="hidden items-center gap-3 md:flex">
+            <ThemeToggle />
             <Button href="#contact" variant="secondary">
               Get a quote
             </Button>
@@ -88,7 +92,8 @@ export function Header() {
                   {item.label}
                 </a>
               ))}
-              <div className="pt-2">
+              <div className="flex flex-col gap-3 pt-2">
+                <ThemeToggle />
                 <Button href="#contact" className="w-full">
                   Get a quote
                 </Button>
