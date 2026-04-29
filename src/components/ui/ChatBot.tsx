@@ -159,6 +159,8 @@ export default function ChatBot() {
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [hasNewMessage, setHasNewMessage] = useState(false);
+  const [showInitialTooltip, setShowInitialTooltip] = useState(true);
+  const [showHoverTooltip, setShowHoverTooltip] = useState(false);
   const bottomRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -169,6 +171,17 @@ export default function ChatBot() {
       setHasNewMessage(false);
     }
   }, [isOpen, messages]);
+
+  // Auto-hide tooltip after 3 seconds
+  useEffect(() => {
+    if (!showInitialTooltip) return;
+
+    const timer = setTimeout(() => {
+      setShowInitialTooltip(false);
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }, [showInitialTooltip]);
 
   const sendMessage = useCallback(
     async (text: string) => {
@@ -232,6 +245,14 @@ export default function ChatBot() {
           70% { box-shadow: 0 0 0 10px rgba(46,196,182,0); }
           100% { box-shadow: 0 0 0 0 rgba(46,196,182,0); }
         }
+        @keyframes tooltipFadeIn {
+          from { opacity: 0; transform: translateY(8px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes tooltipFadeOut {
+          from { opacity: 1; transform: translateY(0); }
+          to { opacity: 0; transform: translateY(8px); }
+        }
         .chat-window {
           animation: chatSlideUp 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
@@ -240,6 +261,12 @@ export default function ChatBot() {
         }
         .chat-toggle {
           transition: transform 0.2s ease;
+        }
+        .tooltip {
+          animation: tooltipFadeIn 0.3s ease-out forwards;
+        }
+        .tooltip.fade-out {
+          animation: tooltipFadeOut 0.3s ease-out forwards;
         }
         .msg-input:focus {
           outline: none;
@@ -260,57 +287,116 @@ export default function ChatBot() {
         }
       `}</style>
 
-      {/* Floating Toggle Button */}
-      <button
-        onClick={() => setIsOpen((v) => !v)}
-        className="chat-toggle"
-        aria-label={isOpen ? "Close chat" : "Open chat"}
+      {/* Floating Toggle Button with Tooltip */}
+      <div
         style={{
           position: "fixed",
-          bottom: 28,
-          right: 28,
-          width: 56,
-          height: 56,
-          borderRadius: "50%",
-          background: "linear-gradient(135deg, var(--primary), rgba(46,196,182,0.7))",
-          border: "none",
-          cursor: "pointer",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
+          bottom: 24,
+          right: 12,
           zIndex: 9999,
-          boxShadow: "0 8px 32px rgba(46,196,182,0.35), 0 2px 8px rgba(0,0,0,0.4)",
-          animation: !isOpen ? "pulse-ring 2.5s ease-out infinite" : "none",
-          color: "#0f1220",
-          fontSize: isOpen ? 22 : 24,
-          fontWeight: 700,
         }}
+        onMouseEnter={() => {
+          if (!isOpen) setShowHoverTooltip(true);
+        }}
+        onMouseLeave={() => setShowHoverTooltip(false)}
       >
-        {isOpen ? "✕" : "✦"}
-        {hasNewMessage && !isOpen && (
-          <span
+        {/* Tooltip */}
+        {(showInitialTooltip || showHoverTooltip) && (
+          <div
+            className={`tooltip ${!showInitialTooltip && showHoverTooltip ? "" : showInitialTooltip && !showHoverTooltip ? "" : "fade-out"}`}
             style={{
               position: "absolute",
-              top: 4,
-              right: 4,
-              width: 10,
-              height: 10,
-              borderRadius: "50%",
-              background: "#ff4d6d",
-              border: "2px solid var(--background)",
+              bottom: 72,
+              right: 0,
+              background: "rgba(20, 24, 43, 0.95)",
+              border: "1px solid rgba(46,196,182,0.2)",
+              borderRadius: 10,
+              padding: "8px 12px",
+              color: "var(--foreground)",
+              fontSize: 13,
+              fontWeight: 500,
+              whiteSpace: "nowrap",
+              backdropFilter: "blur(12px)",
+              boxShadow: "0 8px 24px rgba(0,0,0,0.3)",
+              pointerEvents: "none",
+            }}
+          >
+            Chat with AG
+            {/* Arrow pointer */}
+            <div
+              style={{
+                position: "absolute",
+                bottom: -4,
+                right: 12,
+                width: 0,
+                height: 0,
+                borderLeft: "5px solid transparent",
+                borderRight: "5px solid transparent",
+                borderTop: "5px solid rgba(46,196,182,0.2)",
+              }}
+            />
+            <div
+              style={{
+                position: "absolute",
+                bottom: -3,
+                right: 12,
+                width: 0,
+                height: 0,
+                borderLeft: "5px solid transparent",
+                borderRight: "5px solid transparent",
+                borderTop: "5px solid rgba(20, 24, 43, 0.95)",
+              }}
+            />
+          </div>
+        )}
+
+        {/* Button */}
+        <button
+          onClick={() => setIsOpen((v) => !v)}
+          className="chat-toggle"
+          aria-label={isOpen ? "Close chat" : "Open chat"}
+          style={{
+            position: "relative",
+            width: 56,
+            height: 56,
+            borderRadius: "50%",
+            background: "linear-gradient(135deg, var(--primary), rgba(46,196,182,0.7))",
+            border: "none",
+            cursor: "pointer",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            boxShadow: "0 8px 32px rgba(46,196,182,0.35), 0 2px 8px rgba(0,0,0,0.4)",
+            animation: !isOpen ? "pulse-ring 2.5s ease-out infinite" : "none",
+            color: "#0f1220",
+            fontSize: isOpen ? 22 : 24,
+            fontWeight: 700,
+          }}
+        >
+          {isOpen ? "✕" : "✦"}
+          {hasNewMessage && !isOpen && (
+            <span
+              style={{
+                position: "absolute",
+                top: 4,
+                right: 4,
+                width: 10,
+                height: 10,
+                borderRadius: "50%",
+                background: "#ff4d6d",
+                border: "2px solid var(--background)",
             }}
           />
-        )}
-      </button>
-
-      {/* Chat Window */}
+          )}
+        </button>
+      </div>
       {isOpen && (
         <div
           className="chat-window"
           style={{
             position: "fixed",
-            bottom: 96,
-            right: 28,
+            bottom: 88,
+            right: 12,
             width: 360,
             height: 520,
             borderRadius: 20,

@@ -91,6 +91,35 @@ export function Header() {
     };
   }, []);
 
+  // Track active section using Intersection Observer
+  useEffect(() => {
+    const sections = document.querySelectorAll("section[id]");
+    if (!sections.length) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        // Find the first (topmost) visible section
+        const visibleEntries = entries.filter((e) => e.isIntersecting);
+        if (visibleEntries.length > 0) {
+          const topMostEntry = visibleEntries.reduce((top, current) => {
+            return current.boundingClientRect.top < top.boundingClientRect.top
+              ? current
+              : top;
+          });
+          setActiveHash(`#${topMostEntry.target.id}`);
+        }
+      },
+      { threshold: 0.3 }
+    );
+
+    sections.forEach((section) => observer.observe(section));
+
+    return () => {
+      sections.forEach((section) => observer.unobserve(section));
+      observer.disconnect();
+    };
+  }, []);
+
   useEffect(() => {
     if (!open) return;
     const onKeyDown = (e: KeyboardEvent) => {
